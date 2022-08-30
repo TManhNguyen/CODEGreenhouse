@@ -26,7 +26,7 @@ const pieChartData = [
   { name: 'Lolo Salad ($3/kg)', value: 6 },
 ];
 
-const COLORS = ['#f18179', '#82c5fb', '#83cab4'];
+const COLORS = ['#222160', '#e61e2a', '#fac800'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }:any) => {
@@ -99,7 +99,7 @@ const Home: NextPage = () => {
     sendJsonMessage,
     lastJsonMessage,
     readyState
-  } = useWebSocket("wss://c4s-iot-backend.herokuapp.com", {
+  } = useWebSocket("wss://code-greenhouse-backend.herokuapp.com", {
     onOpen: () => {
       console.log("WS open...")
       const data = {
@@ -114,7 +114,7 @@ const Home: NextPage = () => {
       switch (messageBody.command) {
         case "updateSensorData":
           setSensorData({
-            ...sensorData, 
+            ...sensorData,
             temperature: messageBody.temperature < 100 ? messageBody.temperature : sensorData.temperature,
             humidity: messageBody.humidity < 100 ? messageBody.humidity : sensorData.humidity,
             waterLevel: messageBody.waterLevel < 100 ? messageBody.waterLevel : sensorData.waterLevel,
@@ -124,7 +124,7 @@ const Home: NextPage = () => {
             solar: messageBody.solar,
           })
           break;
-      
+
         default:
           console.log("Unknown command: " + messageBody.command)
           break;
@@ -149,27 +149,26 @@ const Home: NextPage = () => {
         <h2 className="text-3xl font-bold text-gray-900 mb-4">
           Showing statistics in <span className="text-blue-500">real-time</span>
           :
-        </h2>      
+        </h2>
           {/* Start main area*/}
-          <div className="overflow-hidden mb-4">
+          <div className="overflow-hidden mb-4 bg-red">
             <dl className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
               <TemperatureStatCard temperature={sensorData.temperature ?? 0} />
               <HumidityStatCard humidity={sensorData.humidity ?? 0} />
               <LightLevelStatCard light={sensorData.light ?? 0} />
               <SolarStatCard solar={sensorData.solar ?? 0} />
-
+              {/*}<PhStatCard ph={sensorData.ph ?? 0} />*/}
               <TdsStatCard tds={sensorData.tds ?? 0} />
-              <PhStatCard ph={sensorData.ph ?? 0} />
-              <WaterLevelStatCard waterLevel={sensorData.waterLevel ?? 0} />
+              {/*<WaterLevelStatCard waterLevel={sensorData.waterLevel ?? 0} />*/}
 
-              <div className="md:col-span-2 gap-y-2 p-4 w-full rounded bg-white">
+              {/*<div className="md:col-span-2 gap-y-2 p-4 w-full rounded bg-white">
                 <div className="flex flex-row">
                   <div className="flex-auto flex flex-col gap-y-2">
-                    <dt className="font-medium text-gray-500">Revenue</dt>
+                    <dt className="font-medium text-gray-500">Revenue</dt> */}
                     {/* <dt className="order-2 text-base font-medium text-gray-500">Delivery</dt> */}
-                    <dd className="text-5xl font-bold text-green-600">
-                    <CountUp isCounting end={6} duration={0.5} /> 
+                    {/*<dd className="text-5xl font-bold text-green-600">
+                    <CountUp isCounting end={6} duration={0.5} />
                       <span className="text-xl ml-2 text-green-500">USD</span>
                     </dd>
                     <dt className="font-medium text-gray-500">
@@ -198,9 +197,9 @@ const Home: NextPage = () => {
                   </PieChart>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="flex flex-col gap-y-2 p-4 w-full rounded bg-white">
+              {/*}<div className="flex flex-col gap-y-2 p-4 w-full rounded bg-white">
                 <dt className="font-medium text-gray-500">Price</dt>
                 <dd>
                   <ul className="font-medium text-gray-900 mb-4">
@@ -208,12 +207,12 @@ const Home: NextPage = () => {
                     <li><span className="text-blue-400">Water:</span> $0.5/Cub m</li>
                   </ul>
                 </dd>
-              </div>
+              </div>*/}
 
 
             </dl>
           </div>
-          
+
         </main>
         <aside className="relative mb-8 lg:my-8 lg:flex lg:flex-col flex-shrink-0 gap-y-4 w-full lg:w-96">
           {/* Start secondary column (hidden on smaller screens) */}
@@ -223,7 +222,7 @@ const Home: NextPage = () => {
                 Controls
               </div>
               <div className="text-base font-medium text-gray-500">
-                You can control the device yourself using the following buttons.  
+                You can control the device yourself using the following buttons.
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -233,18 +232,18 @@ const Home: NextPage = () => {
                 () => {sendCommand("setPump", !pumpEnabled); setPumpEnabled(!pumpEnabled);}} />
               <FanToggle enabled={fanEnabled} onClick={
                 () => {sendCommand("setFan", !fanEnabled); setFanEnabled(!fanEnabled);}} />
-              
+
             </div>
           </div>
 
-          
+
           {/* <div className="bg-white p-4 rounded">
             <div className="flex flex-col mb-4">
               <div className="flex-shrink-0 font-medium text-xl">
                 Automation
               </div>
               <div className="text-base font-medium text-gray-500">
-                The system will auto-adjust to meet the following environment configurations.  
+                The system will auto-adjust to meet the following environment configurations.
               </div>
             </div>
 

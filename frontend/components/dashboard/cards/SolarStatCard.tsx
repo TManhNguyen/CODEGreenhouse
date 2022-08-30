@@ -7,9 +7,9 @@ type Props = {
 const SolarStatCard = ({
   solar
 }: Props) => {
-  return (  
+  return (
     <GenericStatCard
-      title="Generated energy"
+      title="Solar Energy Harvesting"
       subtitle={ solar > 5 ? "Harvesting high power." : "Harvesting low power."}
       number={Math.round(solar/10)}
       quantifier="W"
@@ -20,8 +20,8 @@ const SolarStatCard = ({
           Do nothing
         </button>
       </div> */}
-    </GenericStatCard>      
-  ) 
+    </GenericStatCard>
+  )
 }
 
 export default SolarStatCard

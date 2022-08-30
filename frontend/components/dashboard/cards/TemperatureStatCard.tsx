@@ -7,11 +7,11 @@ type Props = {
 const TemperatureStatCard = ({
   temperature
 }: Props) => {
-  return (  
+  return (
     <GenericStatCard
       title="Temperature"
       subtitle="Optimal temperature reached."
-      number={temperature}
+      number={Math.round(temperature)}
       isOptimal={true}
       quantifier="°C"
     >
@@ -19,7 +19,7 @@ const TemperatureStatCard = ({
         No available action
       </div> */}
     </GenericStatCard>
-  ) 
+  )
 }
 
 export default TemperatureStatCard

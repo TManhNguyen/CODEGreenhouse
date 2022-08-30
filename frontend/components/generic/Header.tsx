@@ -9,7 +9,7 @@ const Header = ({
   socketStatus
 }: Props) => {
   return (
-    <Disclosure as="nav" className="bg-green-400">
+    <Disclosure as="nav" className="bg-red-600">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-8">
@@ -17,13 +17,12 @@ const Header = ({
 
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center gap-2">
-                  <span className="w-8 h-8 bg-gray-100 rounded"></span>
                   <span className="text-white font-bold text-2xl">{ SITE_NAME }</span>
                 </div>
-                
+
                 <div className="flex-grow" />
                 <div className="flex-shrink-0 flex items-center">
-                <button className="max-w-xs transition bg-green-500 rounded-full flex items-center text-sm active:ring-2 active:ring-blue-300 py-2 px-4 lg:rounded-full lg:hover:bg-green-600">
+                <button className="max-w-xs transition bg-red-600 rounded-full flex items-center text-sm active:ring-2 active:ring-blue-300 py-2 px-4 lg:rounded-full lg:hover:bg-green-600">
                   <span className="text-white text-base font-medium lg:block">
                     {socketStatus}
                   </span>
@@ -31,7 +30,7 @@ const Header = ({
                     className="hidden flex-shrink-0 h-5 w-5 ml-1 text-white lg:block"
                     aria-hidden="true"
                   /> */}
-                </button>    
+                </button>
               </div>
 
               </div>
